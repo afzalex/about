@@ -29,8 +29,8 @@ ul.icons a {
 }
 
 .icons i {
-  font-size: 30px;
-  line-height:60px;
+  font-size: 18px;
+  line-height: 42px;
 }
 
 .icons {
@@ -94,14 +94,48 @@ ul.icons a {
   }
 }
 
-.projects-container, .experience-container, .education-container {
+.projects-container, .experience-container, .education-container, .skillset-container {
   h3 {
     margin-bottom: 0;
   }
 }
 
-.experience, .education, .project {
-  margin-top: 3em;
+.education {
+  font-size: 1.5em;
+}
+
+.skillset li {
+  padding: 5px 15px;
+  float: left;
+  list-style: none;
+ 
+  :before {
+    content: '\26AC ';
+  }
+
+  // Small devices (landscape phones, 576px and up)
+  @media (min-width: 576px) {
+    min-width: 98%; 
+  }
+
+  // Medium devices (tablets, 768px and up)
+  @media (min-width: 768px) { 
+    min-width: 48%;
+  }
+
+  // Large devices (desktops, 992px and up)
+  @media (min-width: 992px) { 
+    min-width: 32%
+  }
+
+  // Extra large devices (large desktops, 1200px and up)
+  @media (min-width: 1200px) { 
+    min-width: 32%
+  }
+}
+
+.experience, .education, .project, .skillset{
+  margin: 2em 15px 3em 15px;
 
   .left-column {
     text-align: left;
@@ -156,19 +190,23 @@ ul.icons a {
 
 .footer-container {
   margin-top:100px;
+  
+  p {
+    font-style: italic;
+    font-weight: bold;
+    font-size: 1.2em;
+
+    .last-updated {
+      float: right;
+    }
+  }
+  
+  a {
+    color: inherit;
+    font-style: italic;
+  }
 }
 
-.footer-container p{
-  text-align: center;
-  font-style: italic;
-  font-weight: 300;
-}
-
-.footer-container a{
-  color: inherit;
-  font-style: italic;
-  font-weight: 300;
-}
 
 .page-content {
   padding: 0;
