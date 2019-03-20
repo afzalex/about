@@ -1,5 +1,5 @@
 # [Mohammad Afzal](https://afzalex.github.io/about)
-[LinkedIn](https://www.linkedin.com/in/afzalex/) | [facebook](https://www.facebook.com/afzalex7) | [github](https://github.com/afzalex) | [Instagram](https://www.instagram.com/afzalex) | [stackoverflow](https://stackoverflow.com/users/3626698/afzalex)
+[LinkedIn](https://www.linkedin.com/in/afzalex/) | [facebook](https://www.facebook.com/afzalex7) | [github](https://github.com/afzalex) | [Instagram](https://www.instagram.com/afzalex) | [stackoverflow](https://stackoverflow.com/users/3626698/afzalex) | [Resume](https://raw.githubusercontent.com/afzalex/about/master/docs/assets/cv.docx)
 
 
 Currently working in **[Enbraun](https://www.eresourcescheduler.com/about-us)** as a **Senior Software Developer**. I have more than 3 years of experience in Web Application Development in current Company.
