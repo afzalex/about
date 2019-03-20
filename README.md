@@ -1,4 +1,6 @@
-# Mohammad Afzal 
+# [Mohammad Afzal](https://afzalex.github.io/about)
+[LinkedIn](https://www.linkedin.com/in/afzalex/) | [facebook](https://www.facebook.com/afzalex7) | [github](https://github.com/afzalex) | [Instagram](https://www.instagram.com/afzalex) | [stackoverflow](https://stackoverflow.com/users/3626698/afzalex)
+
 
 Senior Software Developer with an experience of more than 3 years in **full stack development** at **[Enbraun](https://www.eresourcescheduler.com/about-us)**.    
 Active member in **[stackoverflow.com](https://stackoverflow.com/users/3626698/afzalex)**  and a passionate guitarist.
