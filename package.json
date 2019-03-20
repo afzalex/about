@@ -10,7 +10,8 @@
   "devDependencies": {},
   "scripts": {
     "server": "http-server docs/",
-    "build-css": "node-sass --include-path scss scss/main.scss -o docs/css"
+    "build-css": "node-sass --include-path scss scss/main.scss -o docs/css",
+	"prod-server": "http-server docs/ -p 80"
   },
   "repository": {
     "type": "git",
