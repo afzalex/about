@@ -12,7 +12,7 @@ I am also active in **[stackoverflow.com](https://stackoverflow.com/users/362669
 #### PERSONAL DETAILS
 
 Phone Number : (091) 7222876247    
-Email ID : mohammad.afzal.cs@gmail.com    
+Email ID : mohammadafzal.tech@gmail.com    
 Prmanent Residence : 271, Sai Vihar Colony, Rishikesh (249201), Uttarakhand    
 Date of birth : 5th October, 1993    
 Nationality : Indian    
