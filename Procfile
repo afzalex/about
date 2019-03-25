@@ -1,1 +1,1 @@
-web: npm run prod-server
+web: node index.js

@@ -1,29 +1,28 @@
 {
-  "name": "resume",
+  "name": "about",
   "version": "1.0.0",
-  "description": "Mohammad Afzal Resume",
+  "description": "About Mohammad Afzal",
+  "engines": {
+    "node": "10.x"
+  },
   "main": "index.js",
+  "scripts": {
+    "build-css": "node-sass --include-path scss scss/main.scss -o docs/css",
+    "start": "node index.js"
+  },
   "dependencies": {
-    "http-server": "^0.11.1",
+    "express": "^4.16.4",
     "node-sass": "^4.11.0"
   },
   "devDependencies": {},
-  "scripts": {
-    "server": "http-server docs/",
-    "build-css": "node-sass --include-path scss scss/main.scss -o docs/css",
-	"prod-server": "http-server docs/ -p 80"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/afzalex/resume.git"
+    "url": "git+https://github.com/afzalex/about.git"
   },
   "keywords": [
-    "MohammadAfzal"
+    "AboutMohammadAfzal"
   ],
   "author": "Mohammad Afzal",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/afzalex/resume/issues"
-  },
-  "homepage": "https://github.com/afzalex/resume#readme"
+  "homepage": "https://github.com/afzalex/about#readme"
 }
