@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+            color: inherit;
+            font-size: inherit;
+            text-decoration: none;
+        }
+
+        body {
+            padding: 0px;
+            margin: 0px;
+            font-family: monospace;
+            font-size: 20px;
+            background-color: black;
+            width: 100%;
+            padding-top: 100px;
+        }
+
+        .c-main-elem {
+            background-color: white;
+            margin-left: auto;
+            margin-right: auto;
+            width: fit-content;
+            padding: 15px;
+            font-size: 0.8em;
+        }
+
+        .c-elem .c-elem {
+            margin-left: 30px;
+        }
+
+        .c-tag-open,
+        .c-tag-close {
+            color: #7d0038;
+        }
+
+        div.c-tag-body {
+            margin-left: 30px;
+        }
+
+        .t-bold {
+            font-weight: bold;
+        }
+
+        .c-inline-elem {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        @media only screen and (max-width: 768px) {
+
+            .c-tag-open,
+            .c-tag-close {
+                color: white;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="c-main-elem c-elem">
+        <span class="c-tag-open">&lt;card&gt;</span>
+        <div class="c-elem t-bold">
+            <span class="c-tag-open">&lt;name&gt;</span>
+            <span class="c-tag-body">Mohammad Afzal</span>
+            <span class="c-tag-close">&lt;/name&gt;</span>
+        </div>
+        <div class="c-elem t-bold">
+            <span class="c-tag-open">&lt;title&gt;</span>
+            <span class="c-tag-body">Software Engineer</span>
+            <span class="c-tag-close">&lt;/title&gt;</span>
+        </div>
+        <div class="c-elem">
+            <span class="c-tag-open">&lt;mobile&gt;</span>
+            <span class="c-tag-body">(+91)7222876247</span>
+            <span class="c-tag-close">&lt;/mobile&gt;</span>
+        </div>
+        <div class="c-elem">
+            <span class="c-tag-open">&lt;address&gt;</span>
+            <div class="c-tag-body">271, Sai Vihar Colony, Veerbhadra Road</div>
+            <div class="c-tag-body">Rishikesh (249201), Uttarakhand</div>
+            <span class="c-tag-close">&lt;/address&gt;</span>
+        </div>
+        <div class="c-elem">
+            <span class="c-tag-open">&lt;email&gt;</span>
+            <span class="c-tag-body">mohammadafzal.tech@gmail.com</span>
+            <span class="c-tag-close">&lt;/email&gt;</span>
+        </div>
+        <div class="c-elem">
+            <span class="c-tag-open">&lt;website&gt;</span>
+            <span class="c-tag-body"><a href="http://about.afzalex.tech">about.afzalex.tech</a></span>
+            <span class="c-tag-close">&lt;/website&gt;</span>
+        </div>
+        <span class="c-tag-close">&lt;/card&gt;</span>
+    </div>
+</body>
+
+</html>
