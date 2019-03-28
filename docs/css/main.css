@@ -520,3 +520,6 @@ p.quote {
       text-align: left;
       padding: 0em 1em;
       margin-top: 1em; } }
+
+.hidden-msg {
+  margin-top: -40px; }
