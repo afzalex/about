@@ -1,14 +1,3 @@
-.link-buttons {
-  position: absolute;
-  bottom: 10px;
-}
-
-.details {
-  font-size: 14px;
-  text-align: center;
-}
-
-
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
 
@@ -106,6 +95,16 @@ iframe {
 
 /*//////////////////////////////////////////////////////////////////
 [ Contact ]*/
+
+.link-buttons {
+  position: absolute;
+  bottom: 10px;
+}
+
+.details {
+  font-size: 14px;
+  text-align: center;
+}
 
 .container-contact {
   width: 100%;  
