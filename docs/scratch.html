@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>About Mohammad Afzal</title>
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="shortcut icon" type="image/x-icon" href="site.favicon">
+
+    <meta name="Description"
+        content="Software Engineer with expertise in Java Development along with System Administration and Team Leading. A full stack developer having work experience in frontend, backend, database and desktop development. Also a hobbyist guitarist.">
+    </meta>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body class="container">
+    <h2 class="text-center">Scratch Pad</h2>
+    <div class="display-2 border p-4 word-counter">
+        <h4>17 words 100 characters</h4>
+        <p class="lead" contenteditable="true">
+            I am a Full Stack Developer with expertise in Java. <br />
+            To know more about me visit <a href="https://about.afzalex.tech">https://about.afzalex.tech</a>
+        </p>
+    </div>
+    <div class="display-2 border border-top-0 p-4 word-counter">
+        <h4>96 words 618 characters</h4>
+        <p class="lead" contenteditable="true">
+            Currently working in Enbraun as a Senior Software Developer. I have more than 3 years of experience in Web
+            Application Development in current Company.<br /><br />
+
+            I am a full stack developer with expertise in Java. Worked on frontend and backend development, Payment
+            gateway (Stripe) and Linux system administration. I have worked with my organization to recruit new
+            developers, to train them, and to setup IT infrastructure.<br /><br />
+
+            I am also active in stackoverflow.com and have more than 7000 reputation points there. Apart from these
+            technical stuff I am a hobbyist guitarist.<br /><br />
+
+            For more information please visit <a href="https://about.afzalex.tech">https://about.afzalex.tech</a>
+        </p>
+    </div>
+
+    <script type="text/javascript">
+        (function(d){
+            var list = d.getElementsByClassName('word-counter');
+            for(var i = 0; i < list.length; i++) {
+                var elm = list[i];
+                checkWordCounting(elm);
+                elm.children[1].onkeyup = recheckWordCounting;
+            }
+
+            function recheckWordCounting(event) {
+                checkWordCounting(event.target.parentElement);
+            }
+
+            function checkWordCounting(element) {
+                var content = element.children[1].innerText;
+                element.firstElementChild.innerHTML = content.split(' ').length + ' words ' + content.length + ' characters';
+            }
+        })(document);
+    </script>
+</body>
+
+</html>
