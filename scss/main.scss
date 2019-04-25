@@ -1,13 +1,25 @@
 @import 'modern-resume-theme';
 
+.project .lead {
+	margin-bottom: 5px;
+	border-bottom: 1px dashed #EEE;
+}
+
 .hidden-msg {
     margin-top: -40px;
 }
 
 @media all {
-	.page-break	{ display: none; }
+	.page-break	{ 
+		display: none; 
+	}
 }
 
 @media print {
-	.page-break	{ display: block; page-break-before: always; }
+	.page-break	{
+		display: block; page-break-before: always; 
+	}
+	.project {
+		page-break-inside: avoid;
+	}
 }

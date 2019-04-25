@@ -7,3 +7,23 @@
         }
     });
 })();*/
+
+(function ($) {
+    $(document).ready(function(){
+        var isProjectContainerHidden = window.location.search.indexOf('hideProjects') > -1;
+        updateProjectContainerVisibility(isProjectContainerHidden);
+        function updateProjectContainerVisibility(doHideProjectContainer) {
+            if (doHideProjectContainer) {
+                $('#togglable-project-container').addClass('hidden');
+                $('#toggle-projects-butten').html('Show Project Profile');
+            } else {
+                $('#togglable-project-container').removeClass('hidden');
+                $('#toggle-projects-butten').html('Hide Project Profile');
+            }
+        }
+        $('#toggle-projects-butten').off('click').on('click', function(){
+            isProjectContainerHidden = !isProjectContainerHidden;
+            updateProjectContainerVisibility(isProjectContainerHidden);
+        });
+    });
+ })(jQuery)

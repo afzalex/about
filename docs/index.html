@@ -70,7 +70,7 @@
                     Phone : (+91) 7222876247
                 </p>
                 <p>
-                    <a href="https://about.afzalex.tech">https://about.afzalex.tech</a>
+                    Website : <a href="https://about.afzalex.tech">about.afzalex.tech</a>
                 </p>
             </div>
         </div>
@@ -110,7 +110,7 @@
                 </div>
             </div>
 
-            <div class="container projects-container">
+            <div class="container experience-container">
                 <h3>Professional Career</h3>
                 <div class="row clearfix project">
                     <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 left-column">
@@ -195,10 +195,15 @@
                             <td> Modern School Rishikesh </td>
                             <td> 88% </td>
                         </tr>
+                        <tr>
+                            <td> <b>In 2010</b> </td>
+                            <td> High School from CISCE </td>
+                            <td> Modern School Rishikesh </td>
+                            <td> 70% </td>
+                        </tr>
                     </table>
                 </div>
             </div>
-
 
             <div class="container skillset-container">
                 <h3>Skillset</h3>
@@ -207,8 +212,10 @@
                         <li class="col-md-4 col-lg-3 col-sm-6">Java8</li>
                         <li class="col-md-4 col-lg-3 col-sm-6">JavaEE</li>
                         <li class="col-md-4 col-lg-3 col-sm-6">Spring</li>
+                        <li class="col-md-4 col-lg-3 col-sm-6">Microservices</li>
+                        <li class="col-md-4 col-lg-3 col-sm-6">Hibernate</li>
                         <li class="col-md-4 col-lg-3 col-sm-6">Linux System Administration</li>
-                        <li class="col-md-4 col-lg-3 col-sm-6">Git (github)</li>
+                        <li class="col-md-4 col-lg-3 col-sm-6">Git (gitlab)</li>
                         <li class="col-md-4 col-lg-3 col-sm-6">Amazon Web Services (EC2, RDS)</li>
                         <li class="col-md-4 col-lg-3 col-sm-6">RESTful Web services</li>
                         <li class="col-md-4 col-lg-3 col-sm-6">RDBMS (Postgresql, SQL)</li>
@@ -223,65 +230,194 @@
                 </div>
             </div>
 
-            <div class="container skillset-container">
-                <h3>Projects</h3>
-                <div class="row clearfix skillset">
-                    <div class="row clearfix project">
-                        <div class="col-xs-12 col-print-12">
-                            <h4 class="lead"><b>eResrouceScheduler Cloud Application (eRS Cloud)</b></h4>
-                            <p>
-                                It is a Cloud based Resource planning, management and scheduling Software written mainly
-                                in Java. I was the core member of the team working on this project and was involved in
-                                <b>Designing</b>, <b>Development</b>, <b>Testing</b> and <b>Deployment</b> of the
-                                application. I was also involved in <b>Recruitment</b> and <b>Training</b> of new
-                                developers and <b>Maintenance</b> of servers for this project. It took more than 3 years
-                                for us to release its first first version, which was released on May, 2018.
-                            </p>
-                            <p>
-                                The technologies used in this project are <b>Java8</b>, JavaEE (Servlets, Filters,
-                                Intercepters etc.), <b>Restful Services</b> (RESTEasy), <b>AngularJS</b>, npm,
-                                bootstrap, Aerospike (<b>NoSQL database</b>), OAuth 2.0, Postgresql, <b>Amazon Web
-                                    Services</b> (EC2, RDS and S3), Apache Velocity, <b>TestNG</b> with Allure for
-                                reporting.
-                            </p>
-                            <p>
-                                I had worked for nearly 4 years on that project with a team of ~15 members in
-                                <b>Enbraun, India</b>. During that period I had worked on different roles. Initially
-                                <b>Development</b> (coding) of the project was my core job. Over the time I was involved
-                                in Designing structure, Deciding technical standards, and selection of IT tools for the
-                                project. I had trained testers <b>Unit Testing</b> of the application with
-                                <b>TestNG</b> and REST Assured. I had taken interviews to hire new
-                                software developers for this project and later trained them to work on the project.
-                            </p>
-                            <p>
-                                Later I worked on international payment gateway <b>Stripe</b>, Amazon web services EC2
-                                server maintenance, RDS and S3 infracture setup. I setup git server (Gitlab) for
-                                development of eRS Cloud and was responsible for maintenance of the development server.
-                                I was extensively involved in setting up of production and testing environment for
-                                successful deployment of this eRS Cloud on Amazon Web Servers. Later <b>Code Review</b>
-                                of Junior developers and Maintenance of Development and Testing server were other
-                                responsibilities under me.
-                            </p>
-                            <p>
-                                <i>Link to API Reference of eRS Cloud : <a
-                                        href="https://apidocs.eresourcescheduler.cloud">
-                                        https://apidocs.eresourcescheduler.cloud </a></i> <br />
-                                <i>Link to eResource Schedulure website : <a href="https://www.eresourcescheduler.com">
-                                        https://www.eresourcescheduler.com </a></i> <br />
-                                <i>Link to eRS Cloud application : <a href="https://app.eresourcescheduler.cloud">
-                                        https://app.eresourcescheduler.cloud </a></i>
-                            </p>
+            <div id="togglable-project-container">
+                <div class="page-break"></div>
+
+                <div class="container projects-container">
+                    <h3>Projects</h3>
+                    <div class="row clearfix">
+                        <div class="row clearfix project">
+                            <div class="col-xs-12 col-print-12">
+                                <h4 class="lead"><b>eResrouceScheduler Cloud Application (eRS Cloud)</b></h4>
+                                <article>
+                                    <p>
+                                        It is a Cloud based Resource planning, management and scheduling Software
+                                        written mainly in Java. I was the core member of the team working on this
+                                        project and was involved in <b>Designing</b>, <b>Development</b>, <b>Testing</b>
+                                        and <b>Deployment</b> of the application. I was also involved in
+                                        <b>Recruitment</b> and <b>Training</b> of new developers and <b>Maintenance</b>
+                                        of servers for this project. It took more than 3 years for us to release its
+                                        first first version, which was released on May, 2018.
+                                    </p>
+                                    <p>
+                                        The technologies used in this project are <b>Java8</b>, JavaEE (Servlets,
+                                        Filters, Intercepters etc.), <b>Restful Services</b> (RESTEasy),
+                                        <b>AngularJS</b>, npm, bootstrap, Aerospike (<b>NoSQL database</b>), OAuth 2.0,
+                                        Postgresql, <b>Amazon Web Services</b> (EC2, RDS and S3), Apache Velocity,
+                                        <b>TestNG</b> with Allure for reporting, <b>Wildfly</b>.
+                                    </p>
+                                    <p>
+                                        I had worked for nearly 4 years on that project with a team of ~15 members in
+                                        <b>Enbraun, India</b>. During that period I had worked on different roles.
+                                        Initially <b>Development</b> (coding) of the project was my core job. Over the
+                                        time I was involved in Designing structure, Deciding technical standards, and
+                                        selection of IT tools for the project. I had trained testers <b>Unit Testing</b>
+                                        of the application with <b>TestNG</b> and REST Assured. I had taken interviews
+                                        to hire new software developers for this project and later trained them to work
+                                        on the project.
+                                    </p>
+                                    <p>
+                                        Later I worked on international payment gateway <b>Stripe</b>, Amazon web
+                                        services EC2 server maintenance, RDS and S3 infracture setup. I setup git server
+                                        (Gitlab) for development of eRS Cloud and was responsible for maintenance of the
+                                        development server. I was extensively involved in setting up of production and
+                                        testing environment for successful deployment of this eRS Cloud on Amazon Web
+                                        Servers. Later <b>Code Review</b> of Junior developers and Maintenance of
+                                        Development and Testing server were other responsibilities under me.
+                                    </p>
+                                    <p>
+                                        <ul>
+                                            <li> <i>Link to API Reference of eRS Cloud : <a
+                                                        href="https://apidocs.eresourcescheduler.cloud">
+                                                        https://apidocs.eresourcescheduler.cloud </a></i> </li>
+                                            <li> <i>Link to eResource Schedulure website : <a
+                                                        href="https://www.eresourcescheduler.com">
+                                                        https://www.eresourcescheduler.com </a></i> </li>
+                                            <li> <i>Link to eRS Cloud application : <a
+                                                        href="https://app.eresourcescheduler.cloud">
+                                                        https://app.eresourcescheduler.cloud </a></i> </li>
+                                        </ul>
+                                    </p>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="row clearfix project">
+                            <div class="col-xs-12 col-print-12">
+                                <h4 class="lead"><b>Abho costing sheet</b></h4>
+                                <article>
+                                    <p>
+                                        It is a Web application to manage costing of a fashion designing industry <a
+                                            href="http://www.abho.in">Abho</a>. Client, fabric used and their costs,
+                                        clothes category, labor and their costs, dyeing cost, embroideries, overheads
+                                        (electricity, internet, etc) could be managed with this application. A precise
+                                        cost of the piece could be obtained at a particular time and of the costume
+                                        created afterwards. There is User management module, separate screens
+                                        (navigation templates) provided and user could be authorized to some or all
+                                        screens. A team of ~6 members worked on this project for first release which was
+                                        released on March, 2016.
+                                    </p>
+                                    <p>
+                                        In this project the File server is provided with servlets, authorization is
+                                        managed with servlet filters, and oauth2 was used for authorization of Restful
+                                        Services. My core responsibility in this project was to take design decisions,
+                                        to mentor other developers and to communicate with client about the
+                                        requirements. In that project we needed to secure front-end files also (i.e.
+                                        javascript), because they were containing business logics. Each user can have
+                                        rights to access particular module, and unauthorised access to front-end files
+                                        is also restricted.
+                                    </p>
+                                    <p>
+                                        Technologies used in this project are <b>Java8</b>, JavaEE (Servlets, Filters,
+                                        Intercepters etc.), <b>Restful Services</b>, AngularJS, Postgresql, Wildfly etc.
+                                    </p>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="row clearfix project">
+                            <div class="col-xs-12 col-print-12">
+                                <h4 class="lead"><b>Notifier</b></h4>
+                                <article>
+                                    <p>
+                                        This is a web application that can notify or remind user about some task or let
+                                        him write daily notes. I created that application for myself to write daily like
+                                        I do in diary. Suppose a user want to get notified every Wednesday to watch a TV
+                                        serial, or want to get reminded of somebody’s birthday, this could be done by
+                                        this web application.
+                                    </p>
+                                    <p>
+                                        A good account management, nice looking notifiers (reminder gadgets), fully
+                                        featured note writing area, cool self-developed (with jQuery) slider are present
+                                        in this web application. All the changes done by user will be made on server
+                                        instantly through ajax. Technologies that are used in this project are
+                                        <b>PHP</b>, HTML5, CSS3, jQuery, tinyMCE, <b>MySQL</b>, Apache Tomcat etc.
+                                    </p>
+                                    <p>
+                                        <ul>
+                                            <li>
+                                                <i>Link to project on GitHub : <a
+                                                        href="https://github.com/afzalex/Notifier">
+                                                        https://github.com/afzalex/Notifier </a></i>
+                                            </li>
+                                        </ul>
+                                    </p>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="row clearfix project">
+                            <div class="col-xs-12 col-print-12">
+                                <h4 class="lead"><b>CQuiz | Desktop Application</b></h4>
+                                <article>
+                                    <p>
+                                        I developed that desktop application to organise a programming quiz competition
+                                        in <a href="https://www.geu.ac.in/content/geu/en.html">Graphic Era
+                                            University</a>.I developed it during my BTech graduation in 2017. This
+                                        application had two interfaces, one for admin users and another for normal users
+                                        (students taking quick competition). Admin user can create questions and review
+                                        answers submitted by normal users. Normal users can give test, compile there
+                                        code, and view their submitted data.
+                                    </p>
+                                    <p>
+                                        The screen of that application id divided into three horizontal resizable
+                                        panels. First panel contain questions created by admin users, that panel is
+                                        editable when logged into application as admin user and is non-editable when
+                                        logged in as normal user. Second panel has editable area for normal user to
+                                        write answer program for provided questions. Third panel contained tools to
+                                        compile and check output of written program. Application has a clock showing
+                                        count down time to normal user, after which they cannot edit their answers i.e.
+                                        second panel will become non-editable. I needed another application to collect
+                                        answers from all user's computers. I had written native functions in <b>C</b>
+                                        language to allow communication between C program and Java program.
+                                    </p>
+                                    <p>
+                                        Technologies used in this application are <b>Java Swing</b>, SAX (Simple API for
+                                        XML), JNI <b>(Java Native Interface)</b>, <b>C</b>, GCC
+                                    </p>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="row clearfix project">
+                            <div class="col-xs-12 col-print-12">
+                                <h4 class="lead"><b>Online Banking System | Swiss bank (In industrial training)</b></h4>
+                                <article>
+                                    <p>
+                                        Developed it with a team of 4 members in struts2 framework during my industrial
+                                        training at <a href="https://www.dituniversity.edu.in/">DIT University</a>
+                                        organised by <a href="https://en.wikipedia.org/wiki/Hewlett-Packard">HP</a> in
+                                        2015. The web application was assumed to be used by bank employees to register
+                                        user account, register online accounts, to do transactions etc. Then customer
+                                        can have his own net banking account and they can do transactions himself. This
+                                        web application was having a Multilanguage (English and Spanish) feature,
+                                        Password hashich scheme with SHA-256, a security is provided by using proper
+                                        hashing technique with SHA-256 and a good self-developed captcha feature.
+                                    </p>
+                                    <p>
+                                        Technologies used in this project are Java7, <b>Struts2</b>, JSPX, Image
+                                        Processing, <b>I18N jstl</b>, MySQL, oracle weblogic.
+                                    </p>
+                                </article>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-
     <div class="container footer-container">
+        <div class="no-print" style="margin-left: -5px;"><button class="btn btn-xs btn-link"
+                id="toggle-projects-butten">View Project Profile </button></div>
         <p>
             <a href="mailto:contact@afzalex.tech" target="_blank">contact@afzalex.tech</a>
-            <span class="last-updated">Last Updated on 4<sup>th</sup> April, 2019</span>
+            <span class="last-updated">Last Updated on 25<sup>th</sup> April, 2019</span>
         </p>
     </div>
 
