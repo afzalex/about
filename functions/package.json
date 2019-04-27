@@ -3,14 +3,20 @@
   "version": "1.0.0",
   "description": "About Mohammad Afzal",
   "engines": {
-    "node": "10.x"
+    "node": "8"
   },
   "main": "index.js",
   "scripts": {
-    "build-css": "node-sass --include-path scss scss/main.scss -o docs/css",
-    "start": "node index.js"
+    "build-css": "node-sass --include-path scss ../scss/main.scss -o ../docs/css",
+    "serve": "firebase serve --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
   },
   "dependencies": {
+    "firebase-admin": "~7.0.0",
+    "firebase-functions": "^2.2.0",
     "express": "^4.16.4",
     "node-sass": "^4.11.0"
   },
