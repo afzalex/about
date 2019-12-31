@@ -1,10 +1,10 @@
 # [Mohammad Afzal](https://afzalex.github.io/about)
-[LinkedIn](https://www.linkedin.com/in/afzalex/) | [facebook](https://www.facebook.com/afzalex7) | [github](https://github.com/afzalex) | [Instagram](https://www.instagram.com/afzalex) | [stackoverflow](https://stackoverflow.com/users/3626698/afzalex) | [Resume](https://raw.githubusercontent.com/afzalex/about/master/docs/assets/cv.docx)
+[LinkedIn](https://www.linkedin.com/in/afzalex/) | [facebook](https://www.facebook.com/afzalex7) | [github](https://github.com/afzalex) | [Instagram](https://www.instagram.com/afzalex) | [stackoverflow](https://stackoverflow.com/users/3626698/afzalex) | [Resume](https://raw.githubusercontent.com/afzalex/about/master/docs/assets/resume.docx)
 
 
-Currently working in **[Enbraun](https://www.eresourcescheduler.com/about-us)** as a **Senior Software Developer**. I have more than 3 years of experience in Web Application Development in current Company.
+Currently working in **[Nagarro](https://www.nagarro.com)** as Senior Associate in Technology. I have more than 4 years of experience in **Full-stack development** with expertise in **Java**.
 
-I am a full stack developer with expertise in Java. Worked on frontend and backend development, Payment gateway (Stripe) and Linux system administration. I have worked with my organization to recruit new developers, to train them, and to setup IT infrastructure.
+Have strong understanding of **Data Structure**, **Algorithms and Design Patterns**. Have worked on **Spring, Angular, ReactJS, docker, mongodb, postgresql**. Have experience in the field of **System Adminstration in linux servers**. I have contributed in key decision making and  in the selection of technologies to develop projects in my current organization. 
 
 I am also active in **[stackoverflow.com](https://stackoverflow.com/users/3626698/afzalex)** and have more than 7000 reputation points there. Apart from these technical stuff I am a hobbyist **guitarist**.
 
@@ -12,7 +12,7 @@ I am also active in **[stackoverflow.com](https://stackoverflow.com/users/362669
 #### PERSONAL DETAILS
 
 Phone Number : (091) 7222876247    
-Email ID : mohammadafzal.tech@gmail.com    
+Email ID : contact@afzalex.tech    
 Prmanent Residence : 271, Sai Vihar Colony, Rishikesh (249201), Uttarakhand    
 Date of birth : 5th October, 1993    
 Nationality : Indian    
@@ -37,15 +37,13 @@ Worked on a Freelance Project, **CQuiz**, a Desktop application, written in java
 | **2010 - 2011** | Intermediate from CISCE | Modern School Rishikesh | 87% |
 
 #### CORE SKILLS
-    * Java8, JavaEE         * Linux System Administration       * Git
+    * Java8, JavaEE         * Linux System Administration       * Git, SVN
+    * ReactJS               * Docker                            * NoSQL (MongoDB, Aerospike)
     * AngularJS             * Restful Services                  * AWS (EC2, RDS)
-    * Spring                * RDBMS (Postgresql, MySQL)         * jQuery
+    * Spring (Boot, MVC)    * RDBMS (Postgresql, MySQL)         * jQuery
 
 #### CONTACT INFO
- - [LinkedIn.com](www.linkedin.com/in/afzalex)
- - [Github.com](https://github.com/afzalex)
- - [Stackoverflow.com](https://stackoverflow.com/users/3626698/afzalex)
-
-
-
+ - [LinkedIn](www.linkedin.com/in/afzalex)
+ - [Github](https://github.com/afzalex)
+ - [Stackoverflow](https://stackoverflow.com/users/3626698/afzalex)
 
