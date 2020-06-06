@@ -23,8 +23,8 @@ app.get("/test", function (req, res) {
 
     app.get('/sender', function (req, res) {
         let testAccount = {
-            user: 'zola27@ethereal.email',
-            pass: 'WDQvtDRwvBh4sdCSrC'
+            user: 'nicholas49@ethereal.email',
+            pass: 'JGDPRtWhKu7EeY8Rfp'
         };
         // nodemailer.createTestAccount()
         //     .then(testAccount => {
