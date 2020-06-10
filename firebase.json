@@ -16,5 +16,10 @@
   "functions": {
     "predeploy": [],
     "source": "functions"
+  },
+  "emulators": {
+    "hosting": {
+      "port": "6670"
+    }
   }
 }

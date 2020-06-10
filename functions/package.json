@@ -3,7 +3,7 @@
   "version": "1.0.2",
   "description": "About Mohammad Afzal",
   "engines": {
-    "node": "8"
+    "node": "10"
   },
   "main": "index.js",
   "scripts": {
@@ -16,9 +16,9 @@
   },
   "dependencies": {
     "express": "^4.16.4",
-    "firebase-admin": "~7.0.0",
-    "firebase-functions": "^2.2.0",
-    "firebase-tools": "^8.2.0",
+    "firebase-admin": "^8.12.1",
+    "firebase-functions": "^3.6.2",
+    "firebase-tools": "^8.4.2",
     "node-sass": "^4.13.1",
     "nodemailer": "^6.4.2"
   },

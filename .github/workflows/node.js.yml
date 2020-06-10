@@ -26,6 +26,4 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
     - run: npm run build --if-present
-    - run: npm run deploy
-      env: 
-        FIREBASE_TOKEN: 1//0g5ME-slVK_t6CgYIARAAGBASNwF-L9IrUQcrdHj5XIEy1S-DsU-Yk42B6pKdAcUT7kIR4VZfnjbxpzLfXxfeX8f3Q-cwzvmEBVw
+

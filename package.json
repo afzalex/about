@@ -1,26 +1,25 @@
 {
   "name": "about",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "About Mohammad Afzal",
   "engines": {
     "node": "8"
   },
   "main": "functions/index.js",
   "scripts": {
-    "build-css": "node-sass --include-path scss ../scss/main.scss -o ../docs/css",
-    "serve": "firebase serve --only functions",
+    "build-css": "node-sass --include-path scss scss/main.scss -o docs/css",
+    "serve": "firebase emulators:start",
     "shell": "firebase functions:shell",
     "start": "npm run shell",
-    "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "deploy": "firebase deploy",
+    "logs": "firebase functions:log",
+    "login:ci": "firebase login:ci"
   },
   "dependencies": {
-    "express": "^4.16.4",
     "firebase-admin": "~7.0.0",
     "firebase-functions": "^2.2.0",
-    "firebase-tools": "^8.2.0",
-    "node-sass": "^4.13.1",
-    "nodemailer": "^6.4.2"
+    "firebase-tools": "^8.4.2",
+    "node-sass": "^4.13.1"
   },
   "devDependencies": {},
   "repository": {

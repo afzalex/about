@@ -6,13 +6,13 @@ Currently working in **[Nagarro](https://www.nagarro.com)** as Senior Associate 
 
 I am a full stack developer with expertise in **Java**. Worked on frontend and backend development, Payment gateway (Stripe) and Linux System Administration etc. I have worked on ERP application and other web application development in product and service based organizations. **Spring, Hibernate, Angular, ReactJS, Docker** are some of the technologies I have mostly worked on.  
 
-I am also active on **[stackoverflow.com](https://stackoverflow.com/users/3626698/afzalex)** and have more than 7000 reputation points there. Apart from these technical stuff I am a hobbyist **guitarist**.
+I am also active on **[stackoverflow.com](https://stackoverflow.com/users/3626698/afzalex)** and have more than 8000 reputation points there. Apart from these technical stuff I am a hobbyist **guitarist**.
   
 
 #### PERSONAL DETAILS
 
 Phone Number : (091) 7222876247    
-Email ID : contact@afzalex.tech    
+Email ID : contact@afzalex.site, mohammadafzal.tech@gmail.com  
 Prmanent Residence : 271, Sai Vihar Colony, Rishikesh (249201), Uttarakhand    
 Date of birth : 5th October, 1993    
 Nationality : Indian    
