@@ -2,7 +2,7 @@
 [LinkedIn](https://www.linkedin.com/in/afzalex/) | [Facebook](https://www.facebook.com/afzalex7) | [Github](https://github.com/afzalex) | [Instagram](https://www.instagram.com/afzalex) | [Stackoverflow](https://stackoverflow.com/users/3626698/afzalex) | [Resume](https://raw.githubusercontent.com/afzalex/about/master/docs/assets/resume.docx)
 
 
-Currently working in **[Nagarro](https://www.nagarro.com)** as Senior Associate in Technology. I have more than 4 years of experience in **Full-stack development** with expertise in **Java**.  
+Currently working in **[Altimetrik](https://www.altimetrik.com)** as Senior Engineer. I have more than 5 years of experience in **web application development** with expertise in **Java**.  
 
 I am a full stack developer with expertise in **Java**. Worked on frontend and backend development, Payment gateway (Stripe) and Linux System Administration etc. I have worked on ERP application and other web application development in product and service based organizations. **Spring, Hibernate, Angular, ReactJS, Docker** are some of the technologies I have mostly worked on.  
 
@@ -21,9 +21,9 @@ Marital Status : Unmarried
 
 #### PROFESSIONAL CARREER
 
-##### Current 
+##### 2019 - 2020 
 **Senior Associate** in **Nagarro**
-Here I have worked on SOA and Microservice applications with Spring Boot, Spring MVC, Angular, Docker, RabbitMQ. I am involved in having meeting with client, understanding their requirement, making documents for their requirement, writing code, and deploying changes to production server.
+Here I have worked on SOA and Microservice applications with Spring Boot, Spring MVC, Angular, Docker, RabbitMQ. I am involved in meeting with client, understanding their requirement, making documents for their requirement, writing code, and deploying changes to production server.
 
 ##### 2017 - 2019 
 **Senior Software Developer** in **Enbraun**
