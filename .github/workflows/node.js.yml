@@ -32,7 +32,6 @@ jobs:
       env: 
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       run: |
-        echo 'Hello World'
-        echo "$FIREBASE_TOKEN"
+        npm run notify-deployment
         npm run deploy
 
