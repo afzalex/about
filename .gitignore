@@ -12,4 +12,4 @@ firebase-debug.log
 node_modules
 
 ui-debug.log
-docs/build
+docs/build/**

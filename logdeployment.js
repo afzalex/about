@@ -2,9 +2,9 @@ const fs = require('fs');
 const os = require("os");
 
 const info_file = './docs/build/last_deployment_info.json';
-var date = new Date().toISOString();
+const date = new Date().toISOString();
 
-var content = `
+const content = `
 {
   "version": "v1.1",
   "date": "${date}",
@@ -12,6 +12,11 @@ var content = `
   "host": "${os.hostname()}"
 }
 `;
+
+const info_file_dir = info_file.substring(0, info_file.lastIndexOf('/'))
+if (!fs.existsSync(info_file_dir)){
+  fs.mkdirSync(info_file_dir);
+}
 
 fs.writeFile(info_file, content, err => {
   if (err) {
