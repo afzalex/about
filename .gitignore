@@ -10,3 +10,5 @@ npm-debug.log
 firebase-debug.log
 
 node_modules
+
+ui-debug.log
