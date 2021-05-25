@@ -9,7 +9,7 @@
 })();*/
 
 (function ($) {
-    $(document).ready(function(){
+    $(document).ready(function () {
         var isProjectContainerHidden = window.location.search.indexOf('hideProjects') > -1;
         updateProjectContainerVisibility(isProjectContainerHidden);
         function updateProjectContainerVisibility(doHideProjectContainer) {
@@ -21,9 +21,16 @@
                 $('#toggle-projects-butten').html('Hide Project Profile');
             }
         }
-        $('#toggle-projects-butten').off('click').on('click', function(){
+        $('#toggle-projects-butten').off('click').on('click', function () {
             isProjectContainerHidden = !isProjectContainerHidden;
             updateProjectContainerVisibility(isProjectContainerHidden);
         });
+
+
+        deploymentInfoPath = 'build/last_deployment_info.json';
+        console.log(`${location.href}${deploymentInfoPath}`);
+        $.getJSON(deploymentInfoPath, d => {
+            $('#last-updated-span').html(moment(d.date).format('L LT'))
+        })
     });
- })(jQuery)
+})(jQuery)

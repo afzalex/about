@@ -13,7 +13,8 @@
     "start": "npm run shell",
     "deploy": "firebase deploy --only hosting",
     "logs": "firebase functions:log",
-    "login:ci": "firebase login:ci"
+    "login:ci": "firebase login:ci",
+    "notify-deployment": "node ./logdeployment.js"
   },
   "dependencies": {
     "firebase-admin": "^9.8.0",
