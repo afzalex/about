@@ -28,6 +28,7 @@ jobs:
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
     - run: npm ci
     - run: npm run build --if-present
-    - run: echo $FIREBASE_TOKEN
+    - run: echo 'Hello World'
+    - run: echo "$FIREBASE_TOKEN"
     - run: npm run deploy
 
