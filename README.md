@@ -2,7 +2,7 @@
 [LinkedIn](https://www.linkedin.com/in/afzalex/) | [Facebook](https://www.facebook.com/afzalex7) | [Github](https://github.com/afzalex) | [Instagram](https://www.instagram.com/afzalex) | [Stackoverflow](https://stackoverflow.com/users/3626698/afzalex) | [Resume](https://raw.githubusercontent.com/afzalex/about/master/docs/assets/resume.docx)
 
 
-Currently working in **[Altimetrik](https://www.altimetrik.com)** as Senior Engineer. I have more than 5 years of experience in **web application development** with expertise in **Java**.  
+Currently working in **[Calibo](https://www.calibo.com/)** as Senior Product Engineer. I have more than 5 years of experience in **web application development** with expertise in **Java**.  
 
 I am a full stack developer with expertise in **Java**. Worked on frontend and backend development, Payment gateway (Stripe) and Linux System Administration etc. I have worked on ERP application and other web application development in product and service based organizations. **Spring, Hibernate, Angular, ReactJS, Docker** are some of the technologies I have mostly worked on.  
 
