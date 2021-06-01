@@ -1,3 +1,4 @@
+![Deployment Status](https://github.com/afzalex/about/actions/workflows/firebase-deployment.yml/badge.svg)
 # [Mohammad Afzal](https://afzalex.github.io/about)
 [LinkedIn](https://www.linkedin.com/in/afzalex/) | [Facebook](https://www.facebook.com/afzalex7) | [Github](https://github.com/afzalex) | [Instagram](https://www.instagram.com/afzalex) | [Stackoverflow](https://stackoverflow.com/users/3626698/afzalex) | [Resume](https://raw.githubusercontent.com/afzalex/about/master/docs/assets/resume.docx)
 
