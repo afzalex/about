@@ -49,5 +49,5 @@ jobs:
           --header "Authorization: Bearer ${DROPBOX_ACCESS_TOKEN}" \
           --header "Dropbox-API-Arg: {\"path\": \"/alpha/resume.docx\",\"mode\": \"overwrite\",\"autorename\": false,\"mute\": false,\"strict_conflict\": false}" \
           --header "Content-Type: application/octet-stream" \
-          --data-binary @resume.docx
+          --data-binary @docs/assets/resume.docx
 
