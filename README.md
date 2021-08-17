@@ -1,4 +1,4 @@
-[![Deployment Status](https://github.com/afzalex/about/actions/workflows/firebase-deployment.yml/badge.svg)](https://github.com/afzalex/about/actions/workflows/firebase-deployment.yml)
+[![Deployment Status](https://github.com/afzalex/about/actions/workflows/deployment.yml/badge.svg)](https://github.com/afzalex/about/actions/workflows/firebase-deployment.yml)
 [![Employer Name](https://img.shields.io/endpoint?color=%23448fff&url=https%3A%2F%2Fmy-sheilds-helper-y5rhm0tqsfb7.runkit.sh%2Femployer%2Fname)](https://www.calibo.com/)
 [![Stackoverflow Reputation](https://img.shields.io/endpoint?url=https%3A%2F%2Fmy-sheilds-helper-y5rhm0tqsfb7.runkit.sh%2Fstackoverflow%2Freputation)](https://stackoverflow.com/users/3626698/afzalex)
 
