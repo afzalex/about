@@ -1,4 +1,5 @@
 #!/bin/bash
+# curl https://afzalex.site/scripts/install-flog.sh | /bin/bash
 
 GITCONFIG_LOC="$HOME/.gitconfig"
 
