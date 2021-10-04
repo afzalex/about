@@ -44,7 +44,6 @@ jobs:
       env: 
         DROPBOX_ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
       run: |
-        echo Testing `date` >> resume.docx
         curl -X POST https://content.dropboxapi.com/2/files/upload \
           --header "Authorization: Bearer ${DROPBOX_ACCESS_TOKEN}" \
           --header "Dropbox-API-Arg: {\"path\": \"/alpha/resume.docx\",\"mode\": \"overwrite\",\"autorename\": false,\"mute\": false,\"strict_conflict\": false}" \
