@@ -3,7 +3,7 @@
 [![Stackoverflow Reputation](https://img.shields.io/endpoint?url=https%3A%2F%2Fmy-sheilds-helper-y5rhm0tqsfb7.runkit.sh%2Fstackoverflow%2Freputation)](https://stackoverflow.com/users/3626698/afzalex)
 
 # [Mohammad Afzal](https://afzalex.github.io/about)
-[LinkedIn](https://www.linkedin.com/in/afzalex/) | [Facebook](https://www.facebook.com/afzalex7) | [Github](https://github.com/afzalex) | [Instagram](https://www.instagram.com/afzalex) | [Stackoverflow](https://stackoverflow.com/users/3626698/afzalex) | [Resume](https://raw.githubusercontent.com/afzalex/about/master/docs/assets/resume.docx)
+[LinkedIn](https://www.linkedin.com/in/afzalex/) | [Facebook](https://www.facebook.com/afzalex7) | [Github](https://github.com/afzalex) | [Instagram](https://www.instagram.com/afzalex) | [Stackoverflow](https://stackoverflow.com/users/3626698/afzalex) | [Resume](https://raw.githubusercontent.com/afzalex/about/master/docs/assets/resume.docx) | [Technotes](https://afzalex.github.io/Technotes/)
 
 
 Currently working in **[Calibo](https://www.calibo.com/)** as Product Development Engineer. I have more than 5 years of experience in **web application development** with expertise in **Java**.  
