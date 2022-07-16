@@ -2,11 +2,11 @@
 [![Employer Name](https://img.shields.io/endpoint?color=%23448fff&url=https%3A%2F%2Fmy-sheilds-helper-y5rhm0tqsfb7.runkit.sh%2Femployer%2Fname)](https://www.calibo.com/)
 [![Stackoverflow Reputation](https://img.shields.io/endpoint?url=https%3A%2F%2Fmy-sheilds-helper-y5rhm0tqsfb7.runkit.sh%2Fstackoverflow%2Freputation)](https://stackoverflow.com/users/3626698/afzalex)
 
-# [Mohammad Afzal](https://afzalex.github.io/about)
-[LinkedIn](https://www.linkedin.com/in/afzalex/) | [Facebook](https://www.facebook.com/afzalex7) | [Github](https://github.com/afzalex) | [Instagram](https://www.instagram.com/afzalex) | [Stackoverflow](https://stackoverflow.com/users/3626698/afzalex) | [Resume](https://raw.githubusercontent.com/afzalex/about/master/docs/assets/resume.docx) | [Technotes](https://afzalex.github.io/Technotes/)
+# [Mohammad Afzal](https://www.afzalex.com)
+[LinkedIn](https://www.linkedin.com/in/afzalex/) | [Facebook](https://www.facebook.com/afzalex7) | [Github](https://github.com/afzalex) | [Instagram](https://www.instagram.com/afzalex) | [Stackoverflow](https://stackoverflow.com/users/3626698/afzalex) | [Resume](https://raw.githubusercontent.com/afzalex/about/fzbot/docs/assets/resume.pdf) | [Technotes](https://technotes.afzalex.com)
 
 
-Currently working in **[Calibo](https://www.calibo.com/)** as Product Development Engineer. I have more than 5 years of experience in **web application development** with expertise in **Java**.  
+Currently working in **[Calibo](https://www.calibo.com/)** as Product Development Engineer. I have about 6 years of experience in **web application development** with expertise in **Java**.  
 
 I am a full stack developer with expertise in **Java**. Worked on frontend and backend development, Payment gateway (Stripe) and Linux System Administration etc. I have worked on ERP application and other web application development in product and service based organizations. **Spring, Hibernate, Angular, ReactJS, Docker** are some of the technologies I have mostly worked on.  
 
