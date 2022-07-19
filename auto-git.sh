@@ -26,4 +26,4 @@ expect -re "Password for " {
     send -- "${env(GIT_REPOSITORY_TOKEN)}\n"
 }
 
-# expect eof
+expect eof
