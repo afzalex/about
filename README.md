@@ -67,4 +67,4 @@ I have worked on other projects also during this period. I developed theme websi
 #### Other Sites
  - [Technotes](https://technotes.afzalex.com)
  - [Contact](https://www.afzalex.com/contact)
- - [Shortcuts Practice](https://www.afzalex.com/shortcut-pracctice)
+ - [Shortcuts Practice](https://www.afzalex.com/shortcut-practice)

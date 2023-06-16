@@ -45,19 +45,27 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Dropbox resume.docx upload
+    - name: Dropbox resume docx upload
       env: 
-        RESUME_DOCX_LOC: "docs/assets/resume.docx"
+        RESUME_DOCX_LOC: "docs/assets"
       run: |
+        sudo apt-get install jq
+        echo "Uploading resume.docx to dropbox"
         curl -X POST https://content.dropboxapi.com/2/files/upload \
           --header "Authorization: Bearer ${DROPBOX_ACCESS_TOKEN}" \
           --header "Dropbox-API-Arg: {\"path\": \"/alpha/resume.docx\",\"mode\": \"overwrite\",\"autorename\": false,\"mute\": false,\"strict_conflict\": false}" \
           --header "Content-Type: application/octet-stream" \
-          --data-binary "@${RESUME_DOCX_LOC}"
+          --data-binary "@${RESUME_DOCX_LOC}/resume.docx" | jq
+        echo "Uploading resume-python.docx to dropbox"
+        curl -X POST https://content.dropboxapi.com/2/files/upload \
+          --header "Authorization: Bearer ${DROPBOX_ACCESS_TOKEN}" \
+          --header "Dropbox-API-Arg: {\"path\": \"/alpha/resume-python.docx\",\"mode\": \"overwrite\",\"autorename\": false,\"mute\": false,\"strict_conflict\": false}" \
+          --header "Content-Type: application/octet-stream" \
+          --data-binary "@${RESUME_DOCX_LOC}/resume-python.docx" | jq
 
-    - name: Create resume.pdf and upload to fzbot branch
+    - name: Create resume pdf and upload to fzbot branch
       env: 
-        RESUME_DOCX_LOC: "docs/assets/resume.docx"
+        RESUME_DOCX_LOC: "docs/assets"
       run: |
         sudo apt-get install unoconv --fix-missing -y
         echo "Dependencies installed"
@@ -66,25 +74,34 @@ jobs:
         git checkout -b fzbot
         git reset --hard master
 
-        doc2pdf "${RESUME_DOCX_LOC}"
+        doc2pdf "${RESUME_DOCX_LOC}/resume.docx"
+        doc2pdf "${RESUME_DOCX_LOC}/resume-python.docx"
 
         git add *
-        git commit -m "Added testfile.txt"
+        git commit -m "Added pdf versions of resumes"
         git fetch
         git branch --set-upstream-to=origin/fzbot fzbot
         git push -f
     
-    - name: Dropbox resume.pdf upload
+    - name: Dropbox resume pdf upload
       env: 
-        RESUME_PDF_LOC: "docs/assets/resume.pdf"
+        RESUME_PDF_LOC: "docs/assets"
       run: |
+        sudo apt-get install jq
         git fetch
         git checkout fzbot
+        echo "Uploading resume.pdf to dropbox"
         curl -X POST https://content.dropboxapi.com/2/files/upload \
           --header "Authorization: Bearer ${DROPBOX_ACCESS_TOKEN}" \
           --header "Dropbox-API-Arg: {\"path\": \"/alpha/resume.pdf\",\"mode\": \"overwrite\",\"autorename\": false,\"mute\": false,\"strict_conflict\": false}" \
           --header "Content-Type: application/octet-stream" \
-          --data-binary "@${RESUME_PDF_LOC}"
+          --data-binary "@${RESUME_PDF_LOC}/resume.pdf" | jq
+        echo "Uploading resume.pdf to dropbox"
+        curl -X POST https://content.dropboxapi.com/2/files/upload \
+          --header "Authorization: Bearer ${DROPBOX_ACCESS_TOKEN}" \
+          --header "Dropbox-API-Arg: {\"path\": \"/alpha/resume-python.pdf\",\"mode\": \"overwrite\",\"autorename\": false,\"mute\": false,\"strict_conflict\": false}" \
+          --header "Content-Type: application/octet-stream" \
+          --data-binary "@${RESUME_PDF_LOC}/resume-python.pdf" | jq
 
   replicate-to-afzalex:
     runs-on: ubuntu-latest
