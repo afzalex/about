@@ -8,6 +8,12 @@
 		},
 		{
 			"path": "../../../essentials-ledger"
+		},
+		{
+			"path": "../../../fz-chat-app"
+		},
+		{
+			"path": "../../../serversetup"
 		}
 	],
 	"settings": {}
