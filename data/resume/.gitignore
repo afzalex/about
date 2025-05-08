@@ -1,0 +1,8 @@
+/temp_base/
+/temp_concrete/
+/temp_target/
+/.vscode/
+/.idea/
+/.gradle/
+/build/
+
