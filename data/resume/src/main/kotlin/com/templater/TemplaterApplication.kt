@@ -3,7 +3,6 @@ package com.templater
 import com.templater.service.DocumentProcessor
 import com.templater.service.DocxSectionUtils
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage
-import org.docx4j.TextUtils
 import org.docx4j.wml.P
 import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner
@@ -20,7 +19,7 @@ class TemplaterApplication {
     fun commandLineRunner(documentProcessor: DocumentProcessor): CommandLineRunner {
         return CommandLineRunner { args ->
             if (args.isEmpty()) {
-                logger.error("No command specified. Available commands: merge, extract-section")
+                logger.error("No command specified. Available commands: merge, extract")
                 exitProcess(1)
             }
 
@@ -37,16 +36,16 @@ class TemplaterApplication {
                         logger.info("  Concrete template: {}", args[2])
                         logger.info("  Output file: {}", args[3])
 
-                        documentProcessor.processDocument(args[1], args[2], args[3])
+                        documentProcessor.mergeDocuments(args[1], args[2], args[3])
                         exitProcess(0)
                     } catch (e: Exception) {
                         logger.error("Document merge failed: {}", e.message, e)
                         exitProcess(1)
                     }
                 }
-                "extract-section" -> {
+                "extract" -> {
                     if (args.size != 3) {
-                        logger.error("Invalid number of arguments for extract-section. Expected: extract-section <docx-file> <heading>")
+                        logger.error("Invalid number of arguments for extract. Expected: extract <docx-file> <heading>")
                         exitProcess(1)
                     }
                     
@@ -61,15 +60,15 @@ class TemplaterApplication {
                         exitProcess(1)
                     } else {
                         val text = sectionContent
-                            .filterIsInstance<P>()
-                            .joinToString("\n") { TextUtils.getText(it).trim() }
-                            .trim()
+                                .filterIsInstance<P>()
+                                .joinToString("    \n") { DocxSectionUtils.paragraphToMarkdown(it) }
+                                .trim()
                         println(text)
                         exitProcess(0)
                     }
                 }
                 else -> {
-                    logger.error("Unknown command: {}. Available commands: merge, extract-section", args[0])
+                    logger.error("Unknown command: {}. Available commands: merge, extract", args[0])
                     exitProcess(1)
                 }
             }

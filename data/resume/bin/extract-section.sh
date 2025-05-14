@@ -11,4 +11,4 @@ fi
 export LOGGING_LEVEL_COM_TEMPLATER=ERROR
 
 
-java -jar "$JAR_PATH" extract-section "$1" "$2"
+java -jar "$JAR_PATH" extract "$1" "$2"
