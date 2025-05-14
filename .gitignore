@@ -13,3 +13,5 @@ node_modules
 
 ui-debug.log
 docs/build/**
+
+**/~$*.docx

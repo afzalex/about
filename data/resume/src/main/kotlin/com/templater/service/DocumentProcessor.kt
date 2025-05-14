@@ -28,7 +28,7 @@ class DocumentProcessor(private val variableManager: VariableManager) {
             val concreteDocument = Docx4J.load(File(concreteDocumentPath))
 
             processHeadersAndFooters(baseDocument)
-            mergeStyles(baseDocument, concreteDocument)
+//            mergeStyles(baseDocument, concreteDocument)
             mergeContent(baseDocument, concreteDocument)
             Docx4J.save(baseDocument, File(targetDocumentPath))
             logger.info("Document merge completed successfully")
@@ -143,24 +143,6 @@ class DocumentProcessor(private val variableManager: VariableManager) {
                     // Style doesn't exist in base document, add it
                     baseStyles.jaxbElement.style.add(concreteStyle)
                     logger.info("Added new style: {}", styleId)
-                } else {
-                    // Style exists, check if it's a list style and update if needed
-                    if (concreteStyle.type == STStyleType.LIST) {
-                        // For list styles, always use the concrete document's style
-                        val index = baseStyles.jaxbElement.style.indexOf(baseStyle)
-                        if (index != -1) {
-                            baseStyles.jaxbElement.style[index] = concreteStyle
-                            logger.info("Updated list style: {}", styleId)
-                        }
-                    } else if (concreteStyle.type == STStyleType.PARAGRAPH && 
-                             concreteStyle.name?.`val`?.startsWith("List") == true) {
-                        // For paragraph styles that are part of lists, update them too
-                        val index = baseStyles.jaxbElement.style.indexOf(baseStyle)
-                        if (index != -1) {
-                            baseStyles.jaxbElement.style[index] = concreteStyle
-                            logger.info("Updated list paragraph style: {}", styleId)
-                        }
-                    }
                 }
             }
         }

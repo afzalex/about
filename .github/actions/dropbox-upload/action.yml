@@ -1,0 +1,40 @@
+name: 'Dropbox Upload'
+description: 'Upload files to Dropbox'
+
+inputs:
+  file_pattern:
+    description: 'Pattern to match files for upload (e.g., "*.pdf" or "resume*.docx")'
+    required: true
+  dropbox_path:
+    description: 'Dropbox path to upload files'
+    required: true
+  working_directory:
+    description: 'Working directory containing files to upload'
+    required: true
+    default: '.'
+  token:
+    description: 'Dropbox access token'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Upload to Dropbox
+      shell: bash
+      working-directory: ${{ inputs.working_directory }}
+      env:
+        DROPBOX_ACCESS_TOKEN: ${{ inputs.token }}
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y jq
+        for file in ${{ inputs.file_pattern }}; do
+          if [ -f "$file" ]; then
+            filename=$(basename "$file")
+            echo "Uploading $filename to dropbox"
+            curl -X POST https://content.dropboxapi.com/2/files/upload \
+              --header "Authorization: Bearer ${DROPBOX_ACCESS_TOKEN}" \
+              --header "Dropbox-API-Arg: {\"path\": \"${{ inputs.dropbox_path }}/$filename\",\"mode\": \"overwrite\",\"autorename\": false,\"mute\": false,\"strict_conflict\": false}" \
+              --header "Content-Type: application/octet-stream" \
+              --data-binary "@$file" | jq
+          fi
+        done 

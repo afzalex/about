@@ -1,0 +1,39 @@
+name: 'DOCX to PDF Converter'
+description: 'Convert DOCX files to PDF using LibreOffice'
+
+inputs:
+  file_pattern:
+    description: 'Pattern to match DOCX files (e.g., "*.docx" or "resume*.docx")'
+    required: true
+  working_directory:
+    description: 'Working directory containing DOCX files'
+    required: true
+    default: '.'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install LibreOffice
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libreoffice
+
+    - name: Convert DOCX to PDF
+      shell: bash
+      working-directory: ${{ inputs.working_directory }}
+      run: |
+        for docx in ${{ inputs.file_pattern }}; do
+          echo "Converting $docx to PDF"
+          if [ -f "$docx" ]; then
+            # Get the directory of the DOCX file
+            dir=$(dirname "$docx")
+            # Get the filename without extension
+            filename=$(basename "$docx" .docx)
+            # Convert to PDF in the same directory
+            libreoffice --headless --convert-to pdf --outdir "$dir" "$docx"
+            echo "Converted $docx to PDF"
+          else
+            echo "File not found: $docx"
+          fi
+        done

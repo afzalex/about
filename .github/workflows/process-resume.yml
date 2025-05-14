@@ -1,0 +1,161 @@
+name: Process Resume
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - data/resume/docs/resume*.docx
+
+jobs:
+  create-resumes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up permissions
+        run: chmod +x data/resume/bin/create-resumes.sh
+
+      - name: Run resume creation script
+        working-directory: data/resume
+        run: ./bin/create-resumes.sh
+
+      - name: Upload DOCX to Dropbox
+        uses: ./.github/actions/dropbox-upload
+        with:
+          file_pattern: 'docs/resume*.docx'
+          dropbox_path: '/about/resume'
+          working_directory: 'data/resume'
+          token: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
+
+      - name: Upload DOCX as artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: resume-docx
+          path: data/resume/docs/resume*.docx
+          if-no-files-found: error
+
+  convert-to-pdf:
+    needs: create-resumes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download DOCX artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: resume-docx
+          path: data/resume/docs
+
+      - name: Convert DOCX to PDF
+        uses: ./.github/actions/docx-to-pdf
+        with:
+          file_pattern: 'docs/resume*.docx'
+          working_directory: 'data/resume'
+
+      - name: Upload PDF to Dropbox
+        uses: ./.github/actions/dropbox-upload
+        with:
+          file_pattern: 'docs/resume*.pdf'
+          dropbox_path: '/about/resume'
+          working_directory: 'data/resume'
+          token: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
+
+      - name: Upload PDF as artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: resume-pdf
+          path: data/resume/docs/resume*.pdf
+          if-no-files-found: error
+
+  update-git:
+    needs: [create-resumes, convert-to-pdf]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: data/resume/docs
+
+      - name: Create and push to git branch
+        run: |
+          git config user.email "afzalex.store@gmail.com"
+          git config user.name "afzalex bot"
+          git checkout -b fzbot
+          git reset --hard master
+          
+          # Copy all generated files to docs/assets
+          mkdir -p docs/assets
+          cp data/resume/docs/resume*.docx docs/assets/ 2>/dev/null || true
+          cp data/resume/docs/resume*.pdf docs/assets/ 2>/dev/null || true
+          
+          git add docs/assets/*
+          git commit -m "Added generated resume files"
+          git fetch
+          git branch --set-upstream-to=origin/fzbot fzbot
+          git push -f
+
+  notify-failure:
+    needs: [create-resumes, convert-to-pdf, update-git]
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Send Email Notification
+        uses: ./.github/actions/notify-email
+        with:
+          email: 'mohammadafzal.tech@gmail.com'
+          subject: 'Workflow Failure: Process Resume'
+          html_content: |
+            <h3>Workflow Failure ❌</h3>
+            <p>The workflow "Process Resume" has failed.</p>
+            <p><strong>Repository:</strong> ${{ github.repository }}</p>
+            <p><strong>Run ID:</strong> ${{ github.run_id }}</p>
+            <p>View the workflow run: <a href="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}">Click here</a></p>
+          gmail_user: ${{ secrets.GMAIL_USER }}
+          gmail_app_password: ${{ secrets.GMAIL_APP_PASSWORD }}
+
+  notify-success:
+    needs: [create-resumes, convert-to-pdf, update-git]
+    if: success()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: List generated PDFs
+        id: list-pdfs
+        run: |
+          echo "pdfs<<EOF" >> $GITHUB_OUTPUT
+          for pdf in data/resume/docs/resume*.pdf; do
+            if [ -f "$pdf" ]; then
+              filename=$(basename "$pdf")
+              echo "- [$filename](https://raw.githubusercontent.com/${{ github.repository }}/fzbot/docs/assets/$filename)" >> $GITHUB_OUTPUT
+            fi
+          done
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Send Email Notification
+        uses: ./.github/actions/notify-email
+        with:
+          email: 'mohammadafzal.tech@gmail.com'
+          subject: 'Workflow Success: Process Resume'
+          html_content: |
+            <h3>Workflow Success ✅</h3>
+            <p>The workflow "Process Resume" has completed successfully.</p>
+            <p><strong>Repository:</strong> ${{ github.repository }}</p>
+            <p><strong>Run ID:</strong> ${{ github.run_id }}</p>
+            <p>View the workflow run: <a href="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}">Click here</a></p>
+            <p><strong>Generated Resumes:</strong></p>
+            <ul>
+            ${{ steps.list-pdfs.outputs.pdfs }}
+            </ul>
+          gmail_user: ${{ secrets.GMAIL_USER }}
+          gmail_app_password: ${{ secrets.GMAIL_APP_PASSWORD }}
