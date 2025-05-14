@@ -5,6 +5,7 @@ import org.docx4j.Docx4J
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage
 import org.docx4j.openpackaging.parts.WordprocessingML.HeaderPart
 import org.docx4j.openpackaging.parts.WordprocessingML.FooterPart
+import org.docx4j.openpackaging.parts.WordprocessingML.StyleDefinitionsPart
 import org.docx4j.wml.*
 import org.docx4j.openpackaging.exceptions.Docx4JException
 import org.slf4j.LoggerFactory
@@ -27,6 +28,7 @@ class DocumentProcessor(private val variableManager: VariableManager) {
             val concreteDocument = Docx4J.load(File(concreteDocumentPath))
 
             processHeadersAndFooters(baseDocument)
+            mergeStyles(baseDocument, concreteDocument)
             mergeContent(baseDocument, concreteDocument)
             Docx4J.save(baseDocument, File(targetDocumentPath))
             logger.info("Document merge completed successfully")
@@ -124,6 +126,44 @@ class DocumentProcessor(private val variableManager: VariableManager) {
             sections.add(Section(currentHeading!!, currentSection.toList()))
         }
         return sections
+    }
+
+    private fun mergeStyles(baseDocument: WordprocessingMLPackage, concreteDocument: WordprocessingMLPackage) {
+        val baseStyles = baseDocument.mainDocumentPart.styleDefinitionsPart
+        val concreteStyles = concreteDocument.mainDocumentPart.styleDefinitionsPart
+
+        if (baseStyles != null && concreteStyles != null) {
+            val baseStyleMap = baseStyles.jaxbElement.style.associateBy { it.styleId }
+            val concreteStyleMap = concreteStyles.jaxbElement.style.associateBy { it.styleId }
+
+            // Process each style from concrete document
+            concreteStyleMap.forEach { (styleId, concreteStyle) ->
+                val baseStyle = baseStyleMap[styleId]
+                if (baseStyle == null) {
+                    // Style doesn't exist in base document, add it
+                    baseStyles.jaxbElement.style.add(concreteStyle)
+                    logger.info("Added new style: {}", styleId)
+                } else {
+                    // Style exists, check if it's a list style and update if needed
+                    if (concreteStyle.type == STStyleType.LIST) {
+                        // For list styles, always use the concrete document's style
+                        val index = baseStyles.jaxbElement.style.indexOf(baseStyle)
+                        if (index != -1) {
+                            baseStyles.jaxbElement.style[index] = concreteStyle
+                            logger.info("Updated list style: {}", styleId)
+                        }
+                    } else if (concreteStyle.type == STStyleType.PARAGRAPH && 
+                             concreteStyle.name?.`val`?.startsWith("List") == true) {
+                        // For paragraph styles that are part of lists, update them too
+                        val index = baseStyles.jaxbElement.style.indexOf(baseStyle)
+                        if (index != -1) {
+                            baseStyles.jaxbElement.style[index] = concreteStyle
+                            logger.info("Updated list paragraph style: {}", styleId)
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private fun mergeContent(baseDocument: WordprocessingMLPackage, concreteDocument: WordprocessingMLPackage) {

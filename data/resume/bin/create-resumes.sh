@@ -9,6 +9,7 @@ BASE_TEMPLATE="./docs/base.template.docx"
 OUTPUT_DIR="./docs"
 CONCRETE_TEMPLATES=(
   "./docs/sde.template.docx"
+  "./docs/ml.template.docx"
 )
 
 mkdir -p "$OUTPUT_DIR"
