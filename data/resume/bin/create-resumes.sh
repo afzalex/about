@@ -12,6 +12,12 @@ CONCRETE_TEMPLATES=(
   "./docs/ml.template.docx"
 )
 
+# Check if JAR exists
+if [[ ! -f "$JAR_PATH" ]]; then
+  echo "❌ Error: JAR not found at $JAR_PATH"
+  exit 1
+fi
+
 mkdir -p "$OUTPUT_DIR"
 
 for CONCRETE_TEMPLATE in "${CONCRETE_TEMPLATES[@]}"; do
@@ -21,8 +27,7 @@ for CONCRETE_TEMPLATE in "${CONCRETE_TEMPLATES[@]}"; do
   java -jar "$JAR_PATH" merge "$BASE_TEMPLATE" "$CONCRETE_TEMPLATE" "$OUTPUT_FILE"
   if [ $? -ne 0 ]; then
     echo "Failed to merge $CONCRETE_TEMPLATE"
+    exit 1
   fi
-  echo
-  # Optionally, add a delay or more logging here
-  # Remove echo if you want less output
+  echo "✅ Successfully created $OUTPUT_FILE"
 done 

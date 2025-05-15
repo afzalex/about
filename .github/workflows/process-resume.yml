@@ -17,6 +17,17 @@ jobs:
       - name: Set up permissions
         run: chmod +x data/resume/bin/create-resumes.sh
 
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Build JAR
+        working-directory: data/resume
+        run: |
+          ./gradlew build
+
       - name: Run resume creation script
         working-directory: data/resume
         run: ./bin/create-resumes.sh
@@ -50,12 +61,20 @@ jobs:
           path: data/resume/docs
 
       - name: Convert DOCX to PDF
+        if: false
         uses: ./.github/actions/docx-to-pdf
         with:
           file_pattern: 'docs/resume*.docx'
           working_directory: 'data/resume'
 
+      - name: Temporary PDF Creation
+        run: |
+          touch data/resume/docs/resume-sde.pdf
+          touch data/resume/docs/resume-ml.pdf
+
+
       - name: Upload PDF to Dropbox
+        if: false
         uses: ./.github/actions/dropbox-upload
         with:
           file_pattern: 'docs/resume*.pdf'
@@ -89,10 +108,12 @@ jobs:
           git checkout -b fzbot
           git reset --hard master
           
+          ls -la data/resume/docs
+
           # Copy all generated files to docs/assets
           mkdir -p docs/assets
-          cp data/resume/docs/resume*.docx docs/assets/ 2>/dev/null || true
-          cp data/resume/docs/resume*.pdf docs/assets/ 2>/dev/null || true
+          cp data/resume/docs/resume-docx/*.docx docs/assets/ 2>/dev/null || true
+          cp data/resume/docs/resume-pdf/*.pdf docs/assets/ 2>/dev/null || true
           
           git add docs/assets/*
           git commit -m "Added generated resume files"
@@ -112,7 +133,7 @@ jobs:
         uses: ./.github/actions/notify-email
         with:
           email: 'mohammadafzal.tech@gmail.com'
-          subject: 'Workflow Failure: Process Resume'
+          subject: 'Workflow Failure ❌'
           html_content: |
             <h3>Workflow Failure ❌</h3>
             <p>The workflow "Process Resume" has failed.</p>
@@ -130,32 +151,33 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: List generated PDFs
-        id: list-pdfs
+      - name: List generated files
+        id: list-files
         run: |
-          echo "pdfs<<EOF" >> $GITHUB_OUTPUT
-          for pdf in data/resume/docs/resume*.pdf; do
-            if [ -f "$pdf" ]; then
-              filename=$(basename "$pdf")
+          echo "files<<EOF" >> $GITHUB_OUTPUT
+          for file in data/resume/docs/resume*.{docx,pdf}; do
+            if [ -f "$file" ]; then
+              filename=$(basename "$file")
               echo "- [$filename](https://raw.githubusercontent.com/${{ github.repository }}/fzbot/docs/assets/$filename)" >> $GITHUB_OUTPUT
             fi
           done
           echo "EOF" >> $GITHUB_OUTPUT
 
+      - name: Process HTML template
+        id: process-template
+        run: |
+          export REPOSITORY="${{ github.repository }}"
+          export RUN_ID="${{ github.run_id }}"
+          export FILES_LIST="${{ steps.list-files.outputs.files }}"
+          envsubst < .github/templates/success.html > processed_template.html
+          cat processed_template.html
+          echo "html=$(base64 -w 0 processed_template.html)" >> $GITHUB_OUTPUT
+
       - name: Send Email Notification
         uses: ./.github/actions/notify-email
         with:
           email: 'mohammadafzal.tech@gmail.com'
-          subject: 'Workflow Success: Process Resume'
-          html_content: |
-            <h3>Workflow Success ✅</h3>
-            <p>The workflow "Process Resume" has completed successfully.</p>
-            <p><strong>Repository:</strong> ${{ github.repository }}</p>
-            <p><strong>Run ID:</strong> ${{ github.run_id }}</p>
-            <p>View the workflow run: <a href="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}">Click here</a></p>
-            <p><strong>Generated Resumes:</strong></p>
-            <ul>
-            ${{ steps.list-pdfs.outputs.pdfs }}
-            </ul>
+          subject: '✨ Resume Generation Complete'
+          html_content: ${{ base64 -d <<< steps.process-template.outputs.html }}
           gmail_user: ${{ secrets.GMAIL_USER }}
           gmail_app_password: ${{ secrets.GMAIL_APP_PASSWORD }}

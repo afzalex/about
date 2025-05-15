@@ -5,7 +5,6 @@ import org.docx4j.Docx4J
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage
 import org.docx4j.openpackaging.parts.WordprocessingML.HeaderPart
 import org.docx4j.openpackaging.parts.WordprocessingML.FooterPart
-import org.docx4j.openpackaging.parts.WordprocessingML.StyleDefinitionsPart
 import org.docx4j.wml.*
 import org.docx4j.openpackaging.exceptions.Docx4JException
 import org.slf4j.LoggerFactory
@@ -21,14 +20,14 @@ class DocumentProcessor(private val variableManager: VariableManager) {
     private val variablePattern = Pattern.compile("\\bdata_([\\w_]+)\\b")
 
     @Throws(Docx4JException::class)
-    fun processDocument(baseDocumentPath: String, concreteDocumentPath: String, targetDocumentPath: String) {
+    fun mergeDocuments(baseDocumentPath: String, concreteDocumentPath: String, targetDocumentPath: String) {
         try {
             logger.info("Starting document merge process")
             val baseDocument = Docx4J.load(File(baseDocumentPath))
             val concreteDocument = Docx4J.load(File(concreteDocumentPath))
 
             processHeadersAndFooters(baseDocument)
-//            mergeStyles(baseDocument, concreteDocument)
+            mergeStyles(baseDocument, concreteDocument)
             mergeContent(baseDocument, concreteDocument)
             Docx4J.save(baseDocument, File(targetDocumentPath))
             logger.info("Document merge completed successfully")
