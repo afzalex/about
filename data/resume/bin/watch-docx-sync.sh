@@ -46,7 +46,7 @@ echo "🔍 Watching $WATCH_DIR for .template.docx changes..."
       continue
     fi
 
-    echo "📦 Committing changes to .template.docx files..."
+    echo "📦 Committing changes to .template.docx files... "
 
     git add docs/*.template.docx
     LAST_COMMIT_MSG=$(git log -1 --pretty=%B)
@@ -57,11 +57,11 @@ echo "🔍 Watching $WATCH_DIR for .template.docx changes..."
     if [[ "$LAST_COMMIT_MSG" == "$COMMIT_MSG" && $SECONDS_SINCE_LAST_COMMIT -lt $MAX_SECONDS ]]; then
       echo "🔄 Amending previous sync commit (last commit was $SECONDS_SINCE_LAST_COMMIT seconds ago)..."
       git commit --amend -m "$COMMIT_MSG"
-#      git push --force
+     git push --force
     else
       echo "🆕 Creating new commit (last commit was $SECONDS_SINCE_LAST_COMMIT seconds ago)..."
       git commit -m "$COMMIT_MSG"
-#      git push
+      git push
     fi
 
     echo "✅ Sync done. Cooling down..."

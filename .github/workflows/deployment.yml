@@ -6,13 +6,14 @@ name: Deployment
 on:
   release:
     types: [published]
+  workflow_dispatch:
   push:
     branches: [master]
     paths:
-      - *.js
-      - *.json
-      - README.md
-      - docs/ 
+      - '*.js'
+      - '*.json'
+      - 'README.md'
+      - 'docs/'
 
 jobs:
 

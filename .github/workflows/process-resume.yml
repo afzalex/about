@@ -1,6 +1,7 @@
 name: Process Resume
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
