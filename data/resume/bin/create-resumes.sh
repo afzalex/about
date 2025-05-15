@@ -7,16 +7,33 @@ LOG_LEVEL="${1:-error}"
 # Hard-coded file paths
 BASE_TEMPLATE="./docs/base.template.docx"
 OUTPUT_DIR="./docs"
-CONCRETE_TEMPLATES=(
-  "./docs/sde.template.docx"
-  "./docs/ml.template.docx"
-)
+
+# Get all template files except base template
+TEMPLATE_FILES=(./docs/*.template.docx)
+CONCRETE_TEMPLATES=()
+for template in "${TEMPLATE_FILES[@]}"; do
+    if [[ "$template" != "$BASE_TEMPLATE" ]]; then
+        CONCRETE_TEMPLATES+=("$template")
+    fi
+done
 
 # Check if JAR exists
 if [[ ! -f "$JAR_PATH" ]]; then
   echo "❌ Error: JAR not found at $JAR_PATH"
   exit 1
 fi
+
+# Check if any concrete templates exist
+if [ ${#CONCRETE_TEMPLATES[@]} -eq 0 ]; then
+    echo "❌ No template files found in ./docs/ (excluding base template)"
+    exit 1
+fi
+
+# Print found templates
+echo "Found templates:"
+for template in "${CONCRETE_TEMPLATES[@]}"; do
+    echo "  - $template"
+done
 
 mkdir -p "$OUTPUT_DIR"
 

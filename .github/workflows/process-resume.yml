@@ -5,12 +5,13 @@ on:
     branches:
       - master
     paths:
-      - data/resume/docs/resume*.docx
+      - data/resume/docs/*.template.docx
 
 jobs:
   create-resumes:
     runs-on: ubuntu-latest
     steps:
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -61,20 +62,12 @@ jobs:
           path: data/resume/docs
 
       - name: Convert DOCX to PDF
-        if: false
         uses: ./.github/actions/docx-to-pdf
         with:
           file_pattern: 'docs/resume*.docx'
           working_directory: 'data/resume'
 
-      - name: Temporary PDF Creation
-        run: |
-          touch data/resume/docs/resume-sde.pdf
-          touch data/resume/docs/resume-ml.pdf
-
-
       - name: Upload PDF to Dropbox
-        if: false
         uses: ./.github/actions/dropbox-upload
         with:
           file_pattern: 'docs/resume*.pdf'
@@ -121,63 +114,68 @@ jobs:
           git branch --set-upstream-to=origin/fzbot fzbot
           git push -f
 
-  notify-failure:
+  notify:
     needs: [create-resumes, convert-to-pdf, update-git]
-    if: failure()
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Send Email Notification
-        uses: ./.github/actions/notify-email
-        with:
-          email: 'mohammadafzal.tech@gmail.com'
-          subject: 'Workflow Failure ❌'
-          html_content: |
-            <h3>Workflow Failure ❌</h3>
-            <p>The workflow "Process Resume" has failed.</p>
-            <p><strong>Repository:</strong> ${{ github.repository }}</p>
-            <p><strong>Run ID:</strong> ${{ github.run_id }}</p>
-            <p>View the workflow run: <a href="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}">Click here</a></p>
-          gmail_user: ${{ secrets.GMAIL_USER }}
-          gmail_app_password: ${{ secrets.GMAIL_APP_PASSWORD }}
-
-  notify-success:
-    needs: [create-resumes, convert-to-pdf, update-git]
-    if: success()
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: List generated files
-        id: list-files
+      - name: Determine workflow status
+        id: workflow-status
         run: |
-          echo "files<<EOF" >> $GITHUB_OUTPUT
-          for file in data/resume/docs/resume*.{docx,pdf}; do
-            if [ -f "$file" ]; then
-              filename=$(basename "$file")
-              echo "- [$filename](https://raw.githubusercontent.com/${{ github.repository }}/fzbot/docs/assets/$filename)" >> $GITHUB_OUTPUT
-            fi
-          done
-          echo "EOF" >> $GITHUB_OUTPUT
+          if [[ "${{ needs.create-resumes.result }}" == "success" && \
+                "${{ needs.convert-to-pdf.result }}" == "success" && \
+                "${{ needs.update-git.result }}" == "success" ]]; then
+            echo "status=success" >> $GITHUB_OUTPUT
+            echo "subject=Resume Generation Complete" >> $GITHUB_OUTPUT
+          else
+            echo "status=failure" >> $GITHUB_OUTPUT
+            echo "subject=Workflow Failure" >> $GITHUB_OUTPUT
+          fi
 
-      - name: Process HTML template
-        id: process-template
+      - name: Download artifacts
+        if: steps.workflow-status.outputs.status == 'success'
+        uses: actions/download-artifact@v4
+        with:
+          path: data/resume/docs
+
+      - name: Process success template
+        if: steps.workflow-status.outputs.status == 'success'
+        run: |
+          # List generated files in HTML format and store in a temporary variable
+          FILES_HTML=$(find data/resume/docs -type f \( -name "resume*.pdf" -o -name "resume*.docx" \) | sort | while read -r file; do
+            filename=$(basename "$file")
+            echo "<li><a href=\"https://raw.githubusercontent.com/${{ github.repository }}/fzbot/docs/assets/$filename\">$filename</a></li>"
+          done | tr '\n' ' ')
+
+          # Process HTML template using the stored files list
+          export REPOSITORY="${{ github.repository }}"
+          export RUN_ID="${{ github.run_id }}"
+          export FILES_LIST="$FILES_HTML"
+          envsubst < .github/templates/success.html > rendered.html
+
+      - name: Process failure template
+        if: steps.workflow-status.outputs.status == 'failure'
         run: |
           export REPOSITORY="${{ github.repository }}"
           export RUN_ID="${{ github.run_id }}"
-          export FILES_LIST="${{ steps.list-files.outputs.files }}"
-          envsubst < .github/templates/success.html > processed_template.html
-          cat processed_template.html
-          echo "html=$(base64 -w 0 processed_template.html)" >> $GITHUB_OUTPUT
+          envsubst < .github/templates/failure.html > rendered.html
+
+      - name: Read rendered template
+        id: read-template
+        run: |
+          echo 'html_content<<EOF' >> $GITHUB_OUTPUT
+          cat rendered.html >> $GITHUB_OUTPUT
+          echo '' >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
 
       - name: Send Email Notification
         uses: ./.github/actions/notify-email
         with:
           email: 'mohammadafzal.tech@gmail.com'
-          subject: '✨ Resume Generation Complete'
-          html_content: ${{ base64 -d <<< steps.process-template.outputs.html }}
+          subject: ${{ steps.workflow-status.outputs.subject }}
+          html_content: ${{ steps.read-template.outputs.html_content }}
           gmail_user: ${{ secrets.GMAIL_USER }}
           gmail_app_password: ${{ secrets.GMAIL_APP_PASSWORD }}

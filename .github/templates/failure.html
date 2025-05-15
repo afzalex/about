@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f8f9fa; border-radius: 8px;">
+        <h2 style="color: #cb2431; text-align: center; margin-bottom: 20px;">❌ Workflow Failure</h2>
+        
+        <div style="background-color: white; padding: 20px; border-radius: 6px; margin-bottom: 20px;">
+            <p style="margin: 0 0 15px 0;">The resume generation workflow has failed. Please check the workflow run for details.</p>
+        </div>
+
+        <div style="background-color: white; padding: 20px; border-radius: 6px;">
+            <h3 style="color: #0366d6; margin: 0 0 10px 0;">🔗 Quick Links</h3>
+            <ul style="list-style-type: none; padding: 0;">
+                <li style="margin-bottom: 8px;">
+                    <a href="https://github.com/${REPOSITORY}/actions/runs/${RUN_ID}" 
+                       style="color: #0366d6; text-decoration: none;">
+                        📋 View Workflow Run
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 20px; color: #586069; font-size: 12px;">
+            <p>Repository: <a href="https://github.com/${REPOSITORY}" style="color: #0366d6; text-decoration: none;">${REPOSITORY}</a></p>
+            <p>Run ID: <a href="https://github.com/${REPOSITORY}/actions/runs/${RUN_ID}" style="color: #0366d6; text-decoration: none;">${RUN_ID}</a></p>
+        </div>
+    </div>
+</body>
+</html> 

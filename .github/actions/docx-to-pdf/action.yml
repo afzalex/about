@@ -14,7 +14,6 @@ runs:
   using: "composite"
   steps:
     - name: Install LibreOffice
-      if: false
       shell: bash
       run: |
         sudo apt-get update
