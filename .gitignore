@@ -15,3 +15,5 @@ ui-debug.log
 docs/build/**
 
 **/~$*.docx
+
+.vscode/

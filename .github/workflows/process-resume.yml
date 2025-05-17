@@ -7,6 +7,10 @@ on:
       - master
     paths:
       - data/resume/docs/*.template.docx
+      
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   create-resumes:
@@ -15,6 +19,12 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            data/resume/
+            .github/
+            scripts/
 
       - name: Set up permissions
         run: chmod +x data/resume/bin/create-resumes.sh
@@ -55,6 +65,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            data/resume/
+            .github/
+            scripts/
 
       - name: Download DOCX artifacts
         uses: actions/download-artifact@v4
@@ -83,52 +99,102 @@ jobs:
           path: data/resume/docs/resume*.pdf
           if-no-files-found: error
 
-  update-git:
-    needs: [create-resumes, convert-to-pdf]
+  generate-website-content:
+    needs: [create-resumes]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Download all artifacts
-        uses: actions/download-artifact@v4
         with:
-          path: data/resume/docs
+          fetch-depth: 1
+          sparse-checkout: |
+            scripts/
+            docs/assets/
+          
+      - name: Use Node.js 20
+        uses: actions/setup-node@v1
+        with:
+          node-version: 20
+          
+      - name: Install dependencies
+        run: |
+          npm install mammoth cheerio
 
-      - name: Create and push to git branch
+      - name: Run the script
+        run: |
+          node scripts/update-site-content-json.js
+
+      - name: Upload content.json
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-content-json
+          path: docs/assets/content.json
+          retention-days: 1
+
+  update-git:
+    needs: [generate-website-content, create-resumes, convert-to-pdf]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            docs/assets/
+
+      - name: Configure git
         run: |
           git config user.email "afzalex.store@gmail.com"
           git config user.name "afzalex bot"
-          git checkout -b fzbot
-          git reset --hard master
+      
+          # Create orphan branch (no history)
+          git checkout --orphan fzbot
+          git reset
+          git checkout master -- docs/assets/
           
-          ls -la data/resume/docs
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
 
-          # Copy all generated files to docs/assets
+      - name: Create target folder and copy only generated files
+        run: |
           mkdir -p docs/assets
-          cp data/resume/docs/resume-docx/*.docx docs/assets/ 2>/dev/null || true
-          cp data/resume/docs/resume-pdf/*.pdf docs/assets/ 2>/dev/null || true
-          
-          git add docs/assets/*
-          git commit -m "Added generated resume files"
-          git fetch
-          git branch --set-upstream-to=origin/fzbot fzbot
-          git push -f
+          cp artifacts/resume-docx/*.docx docs/assets/ 2>/dev/null || true
+          cp artifacts/resume-pdf/*.pdf docs/assets/ 2>/dev/null || true
+          cp artifacts/site-content-json/content.json docs/assets/ 2>/dev/null || true
 
+      - name: Create and push clean fzbot branch
+        run: |
+          echo "Git status"
+          git status
+
+          # Stage and commit
+          git add docs/assets/*
+          git commit -m "Initial commit with only generated resume files"
+      
+          # Push forcefully to remote branch
+          git push -f origin fzbot
+        
   notify:
-    needs: [create-resumes, convert-to-pdf, update-git]
+    needs: [create-resumes, convert-to-pdf, update-git, generate-website-content]
     if: always()
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            .github/
+            scripts/
 
       - name: Determine workflow status
         id: workflow-status
         run: |
           if [[ "${{ needs.create-resumes.result }}" == "success" && \
                 "${{ needs.convert-to-pdf.result }}" == "success" && \
-                "${{ needs.update-git.result }}" == "success" ]]; then
+                "${{ needs.update-git.result }}" == "success" && \
+                "${{ needs.generate-website-content.result }}" == "success" ]]; then
             echo "status=success" >> $GITHUB_OUTPUT
             echo "subject=Resume Generation Complete" >> $GITHUB_OUTPUT
           else
@@ -140,13 +206,13 @@ jobs:
         if: steps.workflow-status.outputs.status == 'success'
         uses: actions/download-artifact@v4
         with:
-          path: data/resume/docs
+          path: artifacts
 
       - name: Process success template
         if: steps.workflow-status.outputs.status == 'success'
         run: |
           # List generated files in HTML format and store in a temporary variable
-          FILES_HTML=$(find data/resume/docs -type f \( -name "resume*.pdf" -o -name "resume*.docx" \) | sort | while read -r file; do
+          FILES_HTML=$(find artifacts -type f \( -name "resume*.pdf" -o -name "resume*.docx" \) | sort | while read -r file; do
             filename=$(basename "$file")
             echo "<li><a href=\"https://raw.githubusercontent.com/${{ github.repository }}/fzbot/docs/assets/$filename\">$filename</a></li>"
           done | tr '\n' ' ')

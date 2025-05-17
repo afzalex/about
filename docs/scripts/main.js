@@ -10,6 +10,19 @@
 
 (function ($) {
     $(document).ready(function () {
+
+        $.getJSON('assets/content.json')
+            .then(data => {
+                console.log(data);
+                
+                const updateContent = (selector, content) => content && $(selector).html(content);
+                updateContent('#job-title', data.title);
+                updateContent('#about-me-content', data.summary);
+            })
+            .catch(error => {
+                console.error('Failed to load content:', error);
+            });
+
         var isProjectContainerHidden = window.location.search.indexOf('hideProjects') > -1;
         updateProjectContainerVisibility(isProjectContainerHidden);
         function updateProjectContainerVisibility(doHideProjectContainer) {

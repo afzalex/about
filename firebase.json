@@ -19,7 +19,10 @@
   },
   "emulators": {
     "hosting": {
-      "port": "6670"
+      "port": 6670
+    },
+    "functions": {
+      "port": 5002
     }
   }
 }

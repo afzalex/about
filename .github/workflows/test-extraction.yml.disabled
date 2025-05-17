@@ -1,0 +1,89 @@
+name: Process Resume
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - data/resume/docs/*.template.docx
+
+jobs:
+  generate-website-content:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            scripts/
+            docs/assets/
+          
+      - name: Use Node.js 20
+        uses: actions/setup-node@v1
+        with:
+          node-version: 20
+          
+      - name: Install dependencies
+        run: |
+          npm install mammoth cheerio
+
+      - name: Run the script
+        run: |
+          node scripts/update-site-content-json.js
+
+      - name: Upload content.json
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-content-json
+          path: docs/assets/content.json
+          retention-days: 1
+
+
+
+  update-git:
+    needs: [generate-website-content]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            docs/assets/
+
+      - name: Configure git
+        run: |
+          git config user.email "afzalex.store@gmail.com"
+          git config user.name "afzalex bot"
+      
+          # Create orphan branch (no history)
+          git checkout --orphan fzbot
+          git reset
+          git checkout master -- docs/assets/
+          
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Create target folder and copy only generated files
+        run: |
+          mkdir -p docs/assets
+          # cp artifacts/resume-docx/*.docx docs/assets/ 2>/dev/null || true
+          # cp artifacts/resume-pdf/*.pdf docs/assets/ 2>/dev/null || true
+          cp artifacts/site-content-json/content.json docs/assets/ 2>/dev/null || true
+
+      - name: Create and push clean fzbot branch
+        run: |
+          echo "Git status"
+          git status
+
+          # Stage and commit
+          git add docs/assets/*
+          git commit -m "Initial commit with only generated resume files"
+      
+          # Push forcefully to remote branch
+          git push -f origin fzbot
+        
