@@ -31,5 +31,4 @@ fs.readFile(info_file, 'utf8' , (err, data) => {
     return
   }
   console.log(data)
-})
-
+}) 

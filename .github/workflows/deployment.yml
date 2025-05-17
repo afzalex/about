@@ -83,7 +83,7 @@ jobs:
           mv ${REPLICATION_FILE_NAME} ./replication/${REPLICATION_FILE_NAME}
           git -C ./replication add ${REPLICATION_FILE_NAME}
           git -C ./replication commit -m "Updated README.md from afzalex/about"
-          cp ./auto-git.sh ./replication
+          cp ./scripts/auto-git.sh ./replication
           cd ./replication
           ./auto-git.sh push
         else 
