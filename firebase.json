@@ -9,20 +9,13 @@
     "rewrites": [
       {
         "source": "**",
-        "function": "app"
+        "destination": "/index.html"
       }
     ]
-  },
-  "functions": {
-    "predeploy": [],
-    "source": "functions"
   },
   "emulators": {
     "hosting": {
       "port": 6670
-    },
-    "functions": {
-      "port": 5002
     }
   }
 }

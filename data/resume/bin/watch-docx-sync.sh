@@ -10,7 +10,7 @@ fi
 REPO_PATH="$PWD"
 WATCH_DIR="$REPO_PATH/docs"
 LOCK_FILE="/tmp/docx-sync.lock"
-COOLDOWN=300  # 5 minutes in seconds
+COOLDOWN=10  
 COMMIT_MSG="Auto-sync: updated *.template.docx files"
 MAX_SECONDS=86400  # 24 hours in seconds
 
