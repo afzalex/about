@@ -53,7 +53,7 @@ jobs:
           token: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
 
       - name: Upload DOCX as artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: resume-docx
           path: data/resume/docs/resume*.docx
@@ -111,10 +111,10 @@ jobs:
             scripts/
             docs/assets/
           
-      - name: Use Node.js 20
-        uses: actions/setup-node@v1
+      - name: Use Node.js 24
+        uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version: 24
           
       - name: Install dependencies
         run: |

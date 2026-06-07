@@ -117,6 +117,7 @@ class DocumentProcessor(private val variableManager: VariableManager) {
                         currentSection.clear()
                     }
                     currentHeading = TextUtils.getText(content).trim()
+                    logger.info("Heading: {}, Value: {}", content.pPr?.pStyle?.`val`, currentHeading)
                 }
             }
             currentSection.add(content)

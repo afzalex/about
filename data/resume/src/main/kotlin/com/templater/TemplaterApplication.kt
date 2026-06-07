@@ -18,25 +18,29 @@ class TemplaterApplication {
     @Bean
     fun commandLineRunner(documentProcessor: DocumentProcessor): CommandLineRunner {
         return CommandLineRunner { args ->
-            if (args.isEmpty()) {
-                logger.error("No command specified. Available commands: merge, extract")
-                exitProcess(1)
+            var argsCopy = args;
+            if (argsCopy.isEmpty()) {
+                logger.warn("No command specified. Available commands: merge, extract")
+                argsCopy = arrayOf("merge", "./docs/base.template.docx", "./docs/sde.template.docx", "./docs/resume-sde.docx")
+                logger.warn("Using default argsCopy : {}", argsCopy.contentToString())
+            } else {
+
             }
 
-            when (args[0]) {
+            when (argsCopy[0]) {
                 "merge" -> {
-                    if (args.size != 4) {
+                    if (argsCopy.size != 4) {
                         logger.error("Invalid number of arguments for merge. Expected: merge <base-template> <concrete-template> <output-file>")
                         exitProcess(1)
                     }
 
                     try {
                         logger.info("Starting document merge with arguments:")
-                        logger.info("  Base template: {}", args[1])
-                        logger.info("  Concrete template: {}", args[2])
-                        logger.info("  Output file: {}", args[3])
+                        logger.info("  Base template: {}", argsCopy[1])
+                        logger.info("  Concrete template: {}", argsCopy[2])
+                        logger.info("  Output file: {}", argsCopy[3])
 
-                        documentProcessor.mergeDocuments(args[1], args[2], args[3])
+                        documentProcessor.mergeDocuments(argsCopy[1], argsCopy[2], argsCopy[3])
                         exitProcess(0)
                     } catch (e: Exception) {
                         logger.error("Document merge failed: {}", e.message, e)
@@ -44,13 +48,13 @@ class TemplaterApplication {
                     }
                 }
                 "extract" -> {
-                    if (args.size != 3) {
+                    if (argsCopy.size != 3) {
                         logger.error("Invalid number of arguments for extract. Expected: extract <docx-file> <heading>")
                         exitProcess(1)
                     }
                     
-                    val docxPath = args[1]
-                    val heading = args[2]
+                    val docxPath = argsCopy[1]
+                    val heading = argsCopy[2]
 
                     val docx = WordprocessingMLPackage.load(java.io.File(docxPath))
                     val sectionContent = DocxSectionUtils.getSectionContentByHeading(docx, heading)
@@ -68,7 +72,7 @@ class TemplaterApplication {
                     }
                 }
                 else -> {
-                    logger.error("Unknown command: {}. Available commands: merge, extract", args[0])
+                    logger.error("Unknown command: {}. Available commands: merge, extract", argsCopy[0])
                     exitProcess(1)
                 }
             }
