@@ -26,7 +26,6 @@ async function extractSectionsFromDocx(filePath) {
 
 extractSectionsFromDocx('docs/assets/resume-sde.docx')
   .then(([sections, $]) => {
-    // ✅ Example: Get specific header content
     const content = {
         'title': $(sections['Mohammad Afzal']).html().split('<br>')[0],
         'summary': sections['Summary'].map(it => `<p>${$(it).html().trim()}</p>`).join()
